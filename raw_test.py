@@ -29,6 +29,8 @@ def main(img_path: Path):
     x_max: int
     y_max: int
     raw_values_dict: dict[tuple[int, int], int] = {}
+
+    # these tuples store (pixel_value, max_of_neighbours) for each colour channel
     red_tuples: list[tuple[int, int]] = []
     green_tuples: list[tuple[int, int]] = []
     blue_tuples: list[tuple[int, int]] = []
@@ -51,7 +53,7 @@ def main(img_path: Path):
         for i, c in enumerate(bayer_type):
             bayer_dict[i] = c
 
-        print("Finding max neighbours")
+        print("Finding max neighbours, this might take some time...")
         for x, y in product(range(x_max), range(y_max)):
             colour: str = bayer_dict[bayer_filter[y, x]]
             value: int = raw_values_dict[(x, y)]
